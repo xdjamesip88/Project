@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Listar Stock</h1>
+
+    <p>
+        <a href="{% url "createstock" %}">Agregar Stock</a>
+    </p>
+
+    <ul>
+        {% for stock in object_list %}
+            <li>
+                <p>{{ stock.usuario }} - {{ stock.fecha }}</p>
+
+                <p>
+
+                    <a href="{% url "editstock" stock.id %}">Editar</a> |
+                    <a href="{% url "deletestock" stock.id %}">Borrar</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ cuenta.usuario }}</h1>
+<p>Fecha: <i>{{ cuenta.fecha }}</i></p>
+<p>Total Entrega: <i>{{ cuenta.totalentrega }}</i></p>
+
+
+<table class="table">
+            {{ stockdetalles.management_form }}
+
+            {% for form in stockdetalles.forms %}
+                {% if forloop.first %}
+                    <thead>
+                    <tr>
+                        {% for field in form.visible_fields %}
+                            <th>{{ field.label|capfirst }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tr class="{% cycle 'row1' 'row2' %} formset_row" >
+                    {% for field in form.visible_fields %}
+                        <td>
+                            {# Include the hidden fields in the form #}
+                            {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </table>
+
+
+<p>
+    <a href="{% url "cuentalist" %}">Regresar</a>
+</p>
+
+
+
+{% endblock %}

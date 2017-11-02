@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Lista de Cuentas</h1>
+
+<p>
+
+</p>
+
+<ul>
+    {% for cuenta in object_list %}
+        <li>
+            <p>{{ cuenta.usuario }} - {{ cuenta.fecha }}</p>
+
+            <p>
+
+                <a href="{% url "cuentadetail" cuenta.id %}">Ver</a> |
+                <a href="{% url "cuentaedit" cuenta.id %}">Editar</a> |
+                <a href="{% url "cuentadelete" cuenta.id %}">Borrar</a>
+
+            </p>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
